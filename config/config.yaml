@@ -1,0 +1,55 @@
+data:
+  raw_path: C:\Users\shani\VS Code\MLOPs\EmployeeAttrition\data\EmployeeAttrition_Kaggle.csv
+  processed_path: C:\Users\shani\VS Code\MLOPs\EmployeeAttrition\data\employee_attrition_clean.csv
+  target: Attrition
+  positive_class: "Yes"
+  drop_cols: 
+    - EmployeeNumber
+    - EmployeeCount
+    - StandardHours
+    - Over18
+  serve_features:
+    - Age
+    - DailyRate
+    - DistanceFromHome
+    - Education
+    - EnvironmentSatisfaction
+    - HourlyRate
+    - JobInvolvement
+    - JobLevel
+    - JobSatisfaction
+    - MonthlyIncome
+    - MonthlyRate
+    - NumCompaniesWorked
+    - PercentSalaryHike
+    - PerformanceRating
+    - RelationshipSatisfaction
+    - StockOptionLevel
+    - TotalWorkingYears
+    - TrainingTimesLastYear
+    - WorkLifeBalance
+    - YearsAtCompany
+    - YearsInCurrentRole
+    - YearsSinceLastPromotion
+    - YearsWithCurrManager
+    - BusinessTravel
+    - Department
+    - EducationField
+    - Gender
+    - JobRole
+    - MaritalStatus
+    - OverTime
+
+split:
+  test_size: 0.2
+  random_state: 42
+  stratify: true
+
+model:
+  type: LogisticRegression
+  params:
+    max_iter: 1000
+    class_weight: balanced
+
+tracking:
+  experiment_name: "employee-attrition"

@@ -1,0 +1,31 @@
+services:
+  # This service runs the MLflow Tracking Server
+  mlflow-server:
+    image: python:3.10-slim
+    container_name: mlflow_server
+    command: >
+      sh -c "pip install mlflow gunicorn &&
+             gunicorn --bind 0.0.0.0:5000 mlflow.server:app"
+    environment:
+      - MLFLOW_BACKEND_STORE_URI=sqlite:////mlflow/mlflow.db
+      - MLFLOW_DEFAULT_ARTIFACT_ROOT=/mlflow/artifacts
+    ports:
+      - "5000:5000"
+    volumes:
+      - mlflow_data_volume:/mlflow
+
+  # This service runs your FastAPI application
+  attrition-api:
+    build: .
+    container_name: attrition_api
+    ports:
+      - "8000:8000"
+    environment:
+      - MLFLOW_TRACKING_URI=http://mlflow-server:5000
+      - MODEL_NAME=employee-attrition-model
+      - MODEL_ALIAS=production
+    depends_on:
+      - mlflow-server
+
+volumes:
+  mlflow_data_volume:

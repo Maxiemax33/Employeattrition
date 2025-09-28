@@ -1,0 +1,17 @@
+# Ignore the Python virtual environment
+venev2/
+
+# Ignore MLflow data and artifacts
+mlflow_data/
+mlruns/
+
+# Ignore data files
+data/
+
+# Ignore Python cache files
+__pycache__/
+*.pyc
+
+# Ignore common editor and OS files
+.vscode/
+.DS_Store

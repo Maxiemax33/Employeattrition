@@ -1,0 +1,8 @@
+name: employee_attrition_env
+channels:
+  - defaults
+dependencies:
+  - python=3.10
+  - pip
+  - pip:
+      - -r requirements.txt

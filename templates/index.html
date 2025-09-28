@@ -1,0 +1,173 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Employee Attrition Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"/>
+</head>
+<body class="bg-light">
+  <div class="container py-4">
+    <h1 class="mb-1">Employee Attrition Predictor</h1>
+    <p class="text-muted">Simple web UI powered by FastAPI + MLflow</p>
+
+    <form id="attrition-form" class="row g-3">
+
+      <!-- NUMERIC INPUTS -->
+      <div class="col-md-3"><label class="form-label">Age</label><input type="number" name="Age" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">DailyRate</label><input type="number" name="DailyRate" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">DistanceFromHome</label><input type="number" name="DistanceFromHome" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">Education</label><input type="number" name="Education" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">EnvironmentSatisfaction</label><input type="number" name="EnvironmentSatisfaction" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">HourlyRate</label><input type="number" name="HourlyRate" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">JobInvolvement</label><input type="number" name="JobInvolvement" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">JobLevel</label><input type="number" name="JobLevel" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">JobSatisfaction</label><input type="number" name="JobSatisfaction" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">MonthlyIncome</label><input type="number" name="MonthlyIncome" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">MonthlyRate</label><input type="number" name="MonthlyRate" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">NumCompaniesWorked</label><input type="number" name="NumCompaniesWorked" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">PercentSalaryHike</label><input type="number" name="PercentSalaryHike" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">PerformanceRating</label><input type="number" name="PerformanceRating" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">RelationshipSatisfaction</label><input type="number" name="RelationshipSatisfaction" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">StockOptionLevel</label><input type="number" name="StockOptionLevel" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">TotalWorkingYears</label><input type="number" name="TotalWorkingYears" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">TrainingTimesLastYear</label><input type="number" name="TrainingTimesLastYear" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">WorkLifeBalance</label><input type="number" name="WorkLifeBalance" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">YearsAtCompany</label><input type="number" name="YearsAtCompany" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">YearsInCurrentRole</label><input type="number" name="YearsInCurrentRole" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">YearsSinceLastPromotion</label><input type="number" name="YearsSinceLastPromotion" class="form-control" required></div>
+      <div class="col-md-3"><label class="form-label">YearsWithCurrManager</label><input type="number" name="YearsWithCurrManager" class="form-control" required></div>
+
+      <!-- CATEGORICAL INPUTS -->
+      <div class="col-md-4">
+        <label class="form-label">BusinessTravel</label>
+        <select class="form-select" name="BusinessTravel" required>
+          <option value="">Choose...</option>
+          <option>Travel_Rarely</option>
+          <option>Travel_Frequently</option>
+          <option>Non-Travel</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Department</label>
+        <select class="form-select" name="Department" required>
+          <option value="">Choose...</option>
+          <option>Sales</option>
+          <option>Research & Development</option>
+          <option>Human Resources</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">EducationField</label>
+        <select class="form-select" name="EducationField" required>
+          <option value="">Choose...</option>
+          <option>Life Sciences</option>
+          <option>Medical</option>
+          <option>Marketing</option>
+          <option>Technical Degree</option>
+          <option>Human Resources</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">Gender</label>
+        <select class="form-select" name="Gender" required>
+          <option value="">Choose...</option>
+          <option>Male</option>
+          <option>Female</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">JobRole</label>
+        <select class="form-select" name="JobRole" required>
+          <option value="">Choose...</option>
+          <option>Sales Executive</option>
+          <option>Sales Representative</option>
+          <option>Research Scientist</option>
+          <option>Laboratory Technician</option>
+          <option>Manufacturing Director</option>
+          <option>Healthcare Representative</option>
+          <option>Human Resources</option>
+          <option>Manager</option>
+          <option>Research Director</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">MaritalStatus</label>
+        <select class="form-select" name="MaritalStatus" required>
+          <option value="">Choose...</option>
+          <option>Single</option>
+          <option>Married</option>
+          <option>Divorced</option>
+        </select>
+      </div>
+      <div class="col-md-4">
+        <label class="form-label">OverTime</label>
+        <select class="form-select" name="OverTime" required>
+          <option value="">Choose...</option>
+          <option>Yes</option>
+          <option>No</option>
+        </select>
+      </div>
+
+      <!-- SUBMIT -->
+      <div class="col-12">
+        <button type="submit" class="btn btn-primary">Predict</button>
+        <button type="button" id="reset-btn" class="btn btn-outline-secondary ms-2">Reset</button>
+      </div>
+    </form>
+
+    <!-- RESULT -->
+    <div class="mt-4 card shadow-sm">
+      <div class="card-body">
+        <h5 class="card-title">Result</h5>
+        <div id="result" class="fs-5">Fill the form and click Predict.</div>
+      </div>
+    </div>
+
+    <footer class="mt-4 text-center text-muted">
+      <small>Powered by FastAPI + MLflow Registry</small>
+    </footer>
+  </div>
+
+  <script>
+    const form = document.getElementById("attrition-form");
+    const resultDiv = document.getElementById("result");
+    const resetBtn = document.getElementById("reset-btn");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+      const payload = {};
+      for (const [k, v] of formData.entries()) {
+        payload[k] = isNaN(v) || v.trim() === "" ? v : Number(v);
+      }
+
+      resultDiv.innerHTML = "Scoring...";
+      try {
+        const res = await fetch("/predict", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ records: [payload] }),
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.detail || "Request failed");
+
+        const r = data.results[0];
+        const label = r.prediction === 1 ? "Attrition: YES" : "Attrition: NO";
+        resultDiv.innerHTML = `
+          <div><strong>${label}</strong></div>
+          <div>Probability(Yes): ${r.probability_yes.toFixed(3)}</div>
+        `;
+      } catch (err) {
+        resultDiv.innerHTML = `<span class="text-danger">Error: ${err.message}</span>`;
+      }
+    });
+
+    resetBtn.addEventListener("click", () => {
+      form.reset();
+      resultDiv.innerHTML = "Fill the form and click Predict.";
+    });
+  </script>
+</body>
+</html>
